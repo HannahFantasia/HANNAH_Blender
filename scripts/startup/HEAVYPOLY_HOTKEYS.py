@@ -3,7 +3,7 @@ bl_info = {
     'description': 'Hotkeys',
     'author': 'Hannah Ümit and Sas van Gulik',
     'version': (0, 1, 0),
-    'blender': (4, 3, 0),
+    'blender': (4, 1, 0),
     'location': '',
     'warning': '',
     'wiki_url': '',
@@ -15,18 +15,18 @@ import bpy
 def get_keymap_items_ctx(window_manager, KeyMapConfig: str, keymap_context: str):
     return window_manager.keyconfigs[KeyMapConfig].keymaps[keymap_context].keymap_items
 
-def add_keymap_attrs(keymap_items,
-                     idname: str,
-                     event_type: str,
-                     value_key,
-                     any=False,
-                     shift=0,
-                     ctrl=0,
-                     alt=0,
-                     oskey=0,
-                     key_modifier='NONE',
-                     direction='ANY',
-                     repeat=False,
+def add_keymap_attrs(keymap_items, 
+                     idname: str, 
+                     event_type: str, 
+                     value_key, 
+                     any=False, 
+                     shift=0, 
+                     ctrl=0, 
+                     alt=0, 
+                     oskey=0, 
+                     key_modifier='NONE', 
+                     direction='ANY', 
+                     repeat=False, 
                      head=False,
                      **kwargs):
 
@@ -42,7 +42,7 @@ def add_keymap_attrs(keymap_items,
     return keymap
 
 def Keymap_Hannah():
-
+    
     def Global_Keys():
         keymap = add_keymap_attrs(km, 'screen.userpref_show', 'TAB', 'PRESS' , ctrl=True)
         keymap = add_keymap_attrs(km, 'wm.window_fullscreen_toggle','F11','PRESS')
@@ -74,7 +74,7 @@ def Keymap_Hannah():
     km = get_keymap_items_ctx(bpy.context.window_manager,'Blender', 'Node Editor')
     Global_Keys()
     keymap = add_keymap_attrs(km, 'node.view_selected', 'MIDDLEMOUSE', 'PRESS', ctrl=True, shift=True)
-
+    
 # Map View2D
     km = get_keymap_items_ctx(bpy.context.window_manager,'Blender', 'View2D')
 
@@ -87,7 +87,7 @@ def Keymap_Hannah():
     keymap = add_keymap_attrs(km, 'action.select_box', 'LEFTMOUSE', 'CLICK_DRAG', mode='SET')
     keymap = add_keymap_attrs(km, 'anim.start_frame_set', 'S', 'PRESS')
     keymap = add_keymap_attrs(km, 'anim.end_frame_set', 'E', 'PRESS')
-
+    
 # Map Dopesheet
     km = get_keymap_items_ctx(bpy.context.window_manager,'Blender', 'Dopesheet')
     Global_Keys()
@@ -102,12 +102,12 @@ def Keymap_Hannah():
     keymap = add_keymap_attrs(km, 'graph.select_box', 'LEFTMOUSE', 'CLICK_DRAG', shift=True, mode='ADD')
     keymap = add_keymap_attrs(km, 'graph.select_box', 'LEFTMOUSE', 'CLICK_DRAG', ctrl=True, mode='SUB')
     keymap = add_keymap_attrs(km, 'graph.select_box', 'LEFTMOUSE', 'CLICK_DRAG', mode='SET')
-
+    
 # Map UV Editor
     km = get_keymap_items_ctx(bpy.context.window_manager,'Blender', 'UV Editor')
     Global_Keys()
     keymap = add_keymap_attrs(km, 'image.view_selected', 'MIDDLEMOUSE', 'PRESS', ctrl=True, shift=True)
-
+    
 #Map 3D View
     km = get_keymap_items_ctx(bpy.context.window_manager,'Blender', '3D View')
     Global_Keys()
@@ -131,7 +131,7 @@ def Keymap_Hannah():
     keymap = add_keymap_attrs(km, 'view3d.select_box', 'LEFTMOUSE', 'CLICK_DRAG',shift=True, mode='ADD')
     keymap = add_keymap_attrs(km, 'view3d.select_box', 'LEFTMOUSE', 'CLICK_DRAG', mode='SET')
     keymap = add_keymap_attrs(km, 'view3d.subdivision_toggle','TAB','PRESS')
-
+    
 #Map Mesh
     km = get_keymap_items_ctx(bpy.context.window_manager,'Blender', 'Mesh')
     Global_Keys()
@@ -189,46 +189,13 @@ def Keymap_Hannah():
 # Map Outliner
     km = get_keymap_items_ctx(bpy.context.window_manager,'Blender',  'Outliner')
     Global_Keys()
-<<<<<<< HEAD
     keymap = add_keymap_attrs(km, 'outliner.show_active', 'MIDDLEMOUSE', 'PRESS', ctrl=True, shift=True)
     keymap = add_keymap_attrs(km, 'wm.delete_without_prompt', 'X', 'PRESS')
-=======
 
-    kmi = km.keymap_items.new('wm.delete_without_prompt', 'X', 'PRESS')
 
-#Function to disable keymap confict
-def disable_default_kmi(km=None, idname=None, retries=10):
-    wm = bpy.context.window_manager
->>>>>>> ea11f46 (Resolving keymap conflict with SmartScale and Move)
-
-    if not (km and idname) or retries < 1:
-        return
-
-    # the default keyconfig
-    kc = wm.keyconfigs['Blender']
-    for kmi in kc.keymaps[km].keymap_items:
-        if kmi.idname == idname:
-            kmi.active = False
-            print("Disabled", kmi.name)
-            return
-
-    print("Retrying..")
-    # add some delay
-    bpy.app.timers.register(
-        lambda: disable_default_kmi(km, idname, retries - 1),
-        first_interval=0.1)
 
 def register():
-<<<<<<< HEAD
     Keymap_Hannah()
-=======
-    Keymap_Heavypoly()
-    #disabling Resize so there is only SmartScale being used on S
-    disable_default_kmi('Object Mode', 'transform.resize')
-    #disabling this one to remove a weird bug,not being able to release mouse after a move
-    disable_default_kmi('3D View', 'transform.translate')
-
->>>>>>> ea11f46 (Resolving keymap conflict with SmartScale and Move)
 
 def unregister():
     Keymap_Hannah()
