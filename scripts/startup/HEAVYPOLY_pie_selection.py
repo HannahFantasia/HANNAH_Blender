@@ -3,7 +3,7 @@ bl_info = {
     "description": "Select Modes",
     "author": "Vaughan Ling",
     "version": (0, 1, 0),
-    "blender": (2, 80, 0),
+    "blender": (4, 3, 0),
     "location": "",
     "warning": "",
     "wiki_url": "",
