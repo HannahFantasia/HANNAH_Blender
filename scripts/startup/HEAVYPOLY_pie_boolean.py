@@ -148,34 +148,7 @@ class HP_OT_boolean_toggle_cutters(bpy.types.Operator):
             else:
                 o.hide_set(False)
         return {'FINISHED'}
-#class HP_Boolean_Toggle_Solver(bpy.types.Operator):
-#    bl_idname = "view3d.hp_boolean_toggle_bool_solver"
-#    bl_label = "hp_boolean_toggle_cutters"
-#    bl_options = {'REGISTER', 'UNDO'}
-#    def execute(self, context):
-#        sel = bpy.context.selected_objects
-#        view_layer = bpy.context.view_layer
-#        bases = [base for base in view_layer.objects if not base.name.startswith("Bool_Cutter") and base.type == 'MESH']
-#        for ob in sel:
-#            #Get Cutters in Sel
-#            if ob.name.startswith('Bool_Cutter'):
-#                cutter = ob
-#                for base in bases:
-#                    for mod in base.modifiers:
-#                        if mod.name == cutter.name:
-#                            if mod.solver == 'BMESH':
-#                                mod.solver = 'CARVE'
-#                            else:
-#                                mod.solver = 'BMESH'
-#            else:
-#                base = ob
-#                for mod in base.modifiers:
-#                    if mod.name.startswith ('Bool_Cutter'):
-#                        if mod.solver == 'BMESH':
-#                            mod.solver = 'CARVE'
-#                        else:
-#                            mod.solver = 'BMESH'
-#        return {'FINISHED'}
+
 class HP_OT_boolean_live(bpy.types.Operator):
     bl_idname = "view3d.hp_boolean_live"
     bl_label = ""
