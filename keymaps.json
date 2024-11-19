@@ -19,47 +19,49 @@
     ],
     "remove_keymap": [
         {
-            "context": ["Blender", "Frames"],
-            "idname": "screen.animation_play"
+            "keymap_config": "Blender",
+            "keymap_context": "Frames",
+            "idname": "screen.animation_play",
+            "event_type": "SPACE",
+            "value_key": "PRESS"
+        },
+        {
+            "keymap_config": "Blender",
+            "keymap_context": "Window",
+            "idname": "wm.save_mainfile",
+            "event_type": "S",
+            "value_key": "PRESS",
+            "ctrl": true
+        },
+        {
+            "keymap_config": "Blender", 
+            "keymap_context": "Window",
+            "idname": "wm.save_as_mainfile",
+            "event_type": "S",
+            "value_key": "PRESS",
+            "ctrl": true,
+            "shift": true
         }
     ],
     "modify_modal_keymap": [
         {
-            "context": ["Blender", "Transform Modal Map"],
+            "keymap_config": "Blender",
+            "keymap_context": "Transform Modal Map",
             "add_modal_keymap": { "modal": "AXIS_Y", "key": "SPACE" },
             "remove_modal_keymap": { "modal": "CONFIRM", "key": "SPACE" }
         }
     ],
     "add_keymap_attrs": [
         {
-            "context": ["Blender", "Object Mode"],
-            "idname": "object.hide_view_clear",
-            "event_type": "H",
-            "value_key": "PRESS",
-            "ctrl": true
-        },
-        {
-            "context": ["Blender", "Object Mode"],
+            "keymap_config": "Blender",
+            "keymap_context": "Window",
             "idname": "transform.translate",
             "event_type": "SPACE",
             "value_key": "PRESS"
         },
         {
-            "context": ["Blender", "3D View"],
-            "idname": "view3d.view_selected",
-            "event_type": "MIDDLEMOUSE",
-            "value_key": "PRESS",
-            "ctrl": true,
-            "shift": true
-        },
-        {
-            "context": ["Blender", "Window"],
-            "idname": "transform.translate",
-            "event_type": "SPACE",
-            "value_key": "PRESS"
-        },
-        {
-            "context": ["Blender", "Window"],
+            "keymap_config": "Blender",
+            "keymap_context": "Window",
             "idname": "wm.console_toggle",
             "event_type": "TAB",
             "value_key": "PRESS",
@@ -67,7 +69,8 @@
             "shift": true
         },
         {
-            "context": ["Blender", "Window"],
+            "keymap_config": "Blender",
+            "keymap_context": "Window",
             "idname": "wm.call_menu_pie",
             "event_type": "S",
             "value_key": "PRESS",
@@ -75,7 +78,8 @@
             "name": "HP_MT_pie_save"
         },
         {
-            "context": ["Blender", "Window"],
+            "keymap_config": "Blender",
+            "keymap_context": "Window",
             "idname": "wm.call_menu_pie",
             "event_type": "S",
             "value_key": "PRESS",
@@ -84,23 +88,16 @@
             "name": "HP_MT_pie_importexport"
         },
         {
-            "context": ["Blender", "Window"],
+            "keymap_config": "Blender",
+            "keymap_context": "Window",
             "idname": "script.reload",
             "event_type": "U",
             "value_key": "PRESS",
             "shift": true
         },
         {
-            "context": ["Blender", "Image"],
-            "idname": "image.view_all",
-            "event_type": "MIDDLEMOUSE",
-            "value_key": "PRESS",
-            "ctrl": true,
-            "shift": true,
-            "fit_view": true
-        },
-        {
-            "context": ["Blender", "Node Editor"],
+            "keymap_config": "Blender",
+            "keymap_context": "Node Editor",
             "idname": "node.view_selected",
             "event_type": "MIDDLEMOUSE",
             "value_key": "PRESS",
@@ -108,13 +105,15 @@
             "shift": true
         },
         {
-            "context": ["Blender", "Animation"],
+            "keymap_config": "Blender",
+            "keymap_context": "Animation",
             "idname": "anim.change_frame",
             "event_type": "MIDDLEMOUSE",
             "value_key": "PRESS"
         },
         {
-            "context": ["Blender", "Dopesheet"],
+            "keymap_config": "Blender",
+            "keymap_context": "Dopesheet",
             "idname": "clip.dopesheet_view_all",
             "event_type": "MIDDLEMOUSE",
             "value_key": "PRESS",
@@ -122,14 +121,16 @@
             "shift": true
         },
         {
-            "context": ["Blender", "Dopesheet"],
+            "keymap_config": "Blender",
+            "keymap_context": "Dopesheet",
             "idname": "transform.transform",
             "event_type": "SPACE",
             "value_key": "PRESS",
             "mode": "TIME_TRANSLATE"
         },
         {
-            "context": ["Blender", "Graph Editor"],
+            "keymap_config": "Blender",
+            "keymap_context": "Graph Editor",
             "idname": "graph.view_selected",
             "event_type": "MIDDLEMOUSE",
             "value_key": "PRESS",
@@ -137,14 +138,16 @@
             "shift": true
         },
         {
-            "context": ["Blender", "Graph Editor"],
+            "keymap_config": "Blender",
+            "keymap_context": "Graph Editor",
             "idname": "graph.cursor_set",
             "event_type": "LEFTMOUSE",
             "value_key": "PRESS",
             "alt": true
         },
         {
-            "context": ["Blender", "UV Editor"],
+            "keymap_config": "Blender",
+            "keymap_context": "UV Editor",
             "idname": "image.view_selected",
             "event_type": "MIDDLEMOUSE",
             "value_key": "PRESS",
@@ -152,7 +155,17 @@
             "shift": true
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "Image",
+            "idname": "image.view_all",
+            "event_type": "MIDDLEMOUSE",
+            "value_key": "PRESS",
+            "ctrl": true,
+            "shift": true
+        },
+        {
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "view3d.view_selected",
             "event_type": "MIDDLEMOUSE",
             "value_key": "PRESS",
@@ -160,7 +173,8 @@
             "shift": true
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "view3d.render_border",
             "event_type": "B",
             "value_key": "PRESS",
@@ -168,7 +182,8 @@
             "shift": true
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "wm.call_menu_pie",
             "event_type": "SPACE",
             "value_key": "PRESS",
@@ -176,7 +191,8 @@
             "name": "HP_MT_pie_select"
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "wm.call_menu_pie",
             "event_type": "SPACE",
             "value_key": "PRESS",
@@ -185,14 +201,16 @@
             "name": "HP_MT_pie_rotate90"
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "wm.call_menu_pie",
             "event_type": "V",
             "value_key": "PRESS",
             "name": "HP_MT_pie_view"
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "wm.call_menu_pie",
             "event_type": "SPACE",
             "value_key": "PRESS",
@@ -201,14 +219,16 @@
             "name": "HP_MT_pie_pivots"
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "wm.call_menu_pie",
             "event_type": "Z",
             "value_key": "PRESS",
             "name": "HP_MT_pie_shading"
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "wm.call_menu_pie",
             "event_type": "B",
             "value_key": "PRESS",
@@ -216,26 +236,39 @@
             "name": "HP_MT_pie_boolean"
         },
         {
-            "context": ["Blender", "3D View"],
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
             "idname": "view3d.subdivision_toggle",
             "event_type": "TAB",
             "value_key": "PRESS"
         },
         {
-            "context": ["Blender", "Mesh"],
+            "keymap_config": "Blender",
+            "keymap_context": "Mesh",
             "idname": "mesh.select_linked",
             "event_type": "LEFTMOUSE",
             "value_key": "DOUBLE_CLICK",
-            "delimit": { "SEAM": true }
+            "delimit": "{'SEAM'}"
         },
         {
-            "context": ["Blender", "Mesh"],
+            "keymap_config": "Blender",
+            "keymap_context": "Mesh",
+            "idname": "mesh.select_linked",
+            "event_type": "LEFTMOUSE",
+            "value_key": "DOUBLE_CLICK",
+            "shift": true,
+            "deselect": false
+        },
+        {
+            "keymap_config": "Blender",
+            "keymap_context": "Mesh",
             "idname": "mesh.dupli_extrude_cursor",
             "event_type": "E",
             "value_key": "PRESS"
         },
         {
-            "context": ["Blender", "Mesh"],
+            "keymap_config": "Blender",
+            "keymap_context": "Mesh",
             "idname": "wm.call_menu",
             "event_type": "E",
             "value_key": "PRESS",
@@ -243,31 +276,35 @@
             "name": "VIEW3D_MT_edit_mesh_extrude"
         },
         {
-            "context": ["Blender", "Grease Pencil"],
+            "keymap_config": "Blender",
+            "keymap_context": "Grease Pencil",
             "idname": "gpencil.select_linked",
             "event_type": "LEFTMOUSE",
             "value_key": "DOUBLE_CLICK",
             "shift": true
         },
         {
-            "context": ["Blender", "Image Paint"],
+            "keymap_config": "Blender",
+            "keymap_context": "Image Paint",
             "idname": "paint.sample_color",
             "event_type": "LEFTMOUSE",
             "value_key": "PRESS",
             "alt": true
         },
         {
-            "context": ["Blender", "Curve"],
+            "keymap_config": "Blender",
+            "keymap_context": "Curve",
             "idname": "curve.select_linked",
             "event_type": "LEFTMOUSE",
             "value_key": "DOUBLE_CLICK",
             "shift": true
         },
         {
-            "context": ["Blender", "Screen"],
+            "keymap_config": "Blender",
+            "keymap_context": "Screen",
             "idname": "screen.redo_last",
             "event_type": "D",
             "value_key": "PRESS"
         }
     ]
-}
+}   
