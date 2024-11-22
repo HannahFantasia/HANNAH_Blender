@@ -15,15 +15,6 @@ import json
 import os
 import ast
 
-# Track keymap items per context
-keymap_registered_addon = []
-keymap_unregistered_addon = []
-
-keymap_registered_global = []
-
-keymap_registered_modal = []
-keymap_unregistered_modal = []
-
 # JSON Parsing and Keymap Context Generation
 def parse_json(json_file_path):
     
@@ -49,11 +40,14 @@ def json_context_to_list(json_data):
     unique_contexts = set()
     excluded_entry = ("Blender", "Transform Modal Map")
 
-    for section in json_data.values():
-        for entry in section:
-            config_context = (entry.get("keymap_config"), entry.get("keymap_context"))
-            if config_context != (None, None) and config_context != excluded_entry:
-                unique_contexts.add(config_context)
+    try:
+        for section in json_data.values():
+            for entry in section:
+                config_context = (entry.get("keymap_config"), entry.get("keymap_context"))
+                if config_context != (None, None) and config_context != excluded_entry:
+                    unique_contexts.add(config_context)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
     unique_contexts_list = list(unique_contexts)
     return unique_contexts_list
@@ -117,25 +111,31 @@ def add_keymap_attrs(keymap_config: str,
     keymap_items_context = get_keymap_items_ctx(keymap_config, keymap_context)
 
     # Create the keymap item
-    keymap_item = keymap_items_context.new(
-        idname,
-        event_type,
-        value_key,
-        any=any,
-        shift=shift,
-        ctrl=ctrl,
-        alt=alt,
-        oskey=oskey,
-        key_modifier=key_modifier,
-        direction=direction,
-        repeat=repeat,
-        head=head
-    )
+    try:
+        keymap_item = keymap_items_context.new(
+            idname,
+            event_type,
+            value_key,
+            any=any,
+            shift=shift,
+            ctrl=ctrl,
+            alt=alt,
+            oskey=oskey,
+            key_modifier=key_modifier,
+            direction=direction,
+            repeat=repeat,
+            head=head
+        )
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-    # Set properties for the keymap item through kwargs
-    for prop_key, prop_value in kwargs.items():
-        if hasattr(keymap_item.properties, prop_key):
-            setattr(keymap_item.properties, prop_key, prop_value)
+    try:
+        # Set properties for the keymap item through kwargs
+        for prop_key, prop_value in kwargs.items():
+            if hasattr(keymap_item.properties, prop_key):
+                setattr(keymap_item.properties, prop_key, prop_value)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
     return [keymap_config, keymap_context, keymap_item]
 
@@ -151,9 +151,12 @@ def remove_keymap_attrs(keymap_config: str,
     keymap_items_context = get_keymap_items_ctx(keymap_config, keymap_context)
 
     for keymap_item in keymap_items_context:
-        if keymap_item.idname == idname and keymap_item.type == event_type and value_key == keymap_item.value:
-            keymap_items_context.remove(keymap_item)
-            return [keymap_config, keymap_context, keymap_item]
+        try:
+            if keymap_item.idname == idname and keymap_item.type == event_type and value_key == keymap_item.value:
+                keymap_items_context.remove(keymap_item)
+                return [keymap_config, keymap_context, keymap_item]
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
 
 # Function to add modal keymaps based on arguments
@@ -166,8 +169,11 @@ def add_modal_attrs(keymap_config: str,
     # retrieve the keymap items context
     keymap_items_context = get_keymap_items_ctx(keymap_config, keymap_context)
     
-    keymap_items_context.new_modal(propvalue, event_type, value_key, **kwargs)
-    return [keymap_config, keymap_context, propvalue, event_type, value_key]
+    try:
+        keymap_items_context.new_modal(propvalue, event_type, value_key, **kwargs)
+        return [keymap_config, keymap_context, propvalue, event_type, value_key]
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 
 # Function to remove modal keymaps based on arguments
@@ -182,10 +188,12 @@ def remove_modal_attrs(keymap_config: str,
     
     # Iterate through the keymap items to find the one matching the provided attributes
     for keymap_item in keymap_items_context:
-        if keymap_item.propvalue == propvalue and keymap_item.type == event_type and keymap_item.value == value_key:
-            keymap_items_context.remove(keymap_item)
-            return [keymap_config, keymap_context, propvalue, event_type, value_key]
-
+        try:
+            if keymap_item.propvalue == propvalue and keymap_item.type == event_type and keymap_item.value == value_key:
+                keymap_items_context.remove(keymap_item)
+                return [keymap_config, keymap_context, propvalue, event_type, value_key]
+        except Exception as e:
+            print(f"An error occurred: {e}")
 ###### ADDON KEYMAPS ######
 
 # add Addon Keys from JSON (use in register)
@@ -199,8 +207,7 @@ def add_addon_keys():
     for keymap in keymap_attrs_data:
         try:
             # Pass the JSON keymap data to add_keymap_attrs
-            keymap_added = add_keymap_attrs(**keymap)
-            keymap_registered_addon.append(keymap_added)
+            add_keymap_attrs(**keymap)
         except Exception as e:
             print(f"Error adding Addon keymap: {e}")
 
@@ -216,38 +223,41 @@ def remove_addon_keys():
     for keymap in keymap_attrs_data:
         try:
             # Pass the JSON keymap data to add_keymap_attrs
-            keymap_removed = remove_keymap_attrs(**keymap)
-            keymap_unregistered_addon.append(keymap_removed)
+            remove_keymap_attrs(**keymap)
         except Exception as e:
             print(f"Error removing Addon keymap: {e}")
 
 
 # remove created addon keys from list (used as a restore for default keymaps in unregister)
-def remove_addon_keys_from_list():
-    for keymap in keymap_registered_addon[:]:
-        keymap_config, keymap_context, keymap_item = keymap
-        remove_keymap_attrs(
-            keymap_config=keymap_config,
-            keymap_context=keymap_context,
-            idname=keymap_item.idname,
-            event_type=keymap_item.type,
-            value_key=keymap_item.value
-        )
-        keymap_registered_addon.remove(keymap)
+def remove_addon_keys_from_json():
+    keymap_attrs_data = convert_sets(json_content.get("add_keymap_attrs", []))
+    if not keymap_attrs_data:
+        print("Warning: No 'add_keymap_attrs' found in the JSON content.")
+        return
+
+    # Process addon keys
+    for keymap in keymap_attrs_data:
+        try:
+            # Pass the JSON keymap data to add_keymap_attrs
+            remove_keymap_attrs(**keymap)
+        except Exception as e:
+            print(f"Error adding Addon keymap: {e}")
 
 
 # restore removed addon keys from list (used as a restore for default keymaps in unregister)
-def add_addon_keys_from_list():
-    for keymap in keymap_unregistered_addon[:]:
-        keymap_config, keymap_context, keymap_item = keymap
-        add_keymap_attrs(
-            keymap_config=keymap_config,
-            keymap_context=keymap_context,
-            idname=keymap_item.idname,
-            event_type=keymap_item.type,
-            value_key=keymap_item.value
-        )
-        keymap_unregistered_addon.remove(keymap)
+def add_addon_keys_from_json():
+    keymap_attrs_data = convert_sets(json_content.get("remove_keymap", []))
+    if not keymap_attrs_data:
+        print("Warning: No 'remove_keymap' found in the JSON content.")
+        return
+    
+    # Process addon keys
+    for keymap in keymap_attrs_data:
+        try:
+            # Pass the JSON keymap data to add_keymap_attrs
+            add_keymap_attrs(**keymap)
+        except Exception as e:
+            print(f"Error restoring Addon keymap: {e}")
 
 
 ###### GLOBAL KEYMAPS ######
@@ -265,24 +275,27 @@ def add_global_keys(add_json_context):
         for keymap in global_keys_data:
             try:
                 # Pass the JSON keymap data to add_keymap_attrs
-                keymap_added = add_keymap_attrs(keymap_config, keymap_context, **keymap)
-                keymap_registered_global.append(keymap_added)
+                add_keymap_attrs(keymap_config, keymap_context, **keymap)
             except Exception as e:
                 print(f"Error adding Global keymap: {e}")
 
 
 # remove created global keys from list (used as a restore for default keymaps in unregister)
-def remove_global_keys_from_list():
-    for keymap in keymap_registered_global[:]:
-        keymap_config, keymap_context, keymap_item = keymap
-        remove_keymap_attrs(
-            keymap_config=keymap_config,
-            keymap_context=keymap_context,
-            idname=keymap_item.idname,
-            event_type=keymap_item.type,
-            value_key=keymap_item.value
-        )
-        keymap_registered_global.remove(keymap)
+def remove_global_keys_from_json():
+    global_keys_data = json_content.get("global_keys", [])
+    if not global_keys_data:
+        print("Warning: No 'global_keys' found in the JSON content.")
+        return
+
+    # Process global keys
+    for keymap_config, keymap_context in add_json_context:
+        for keymap in global_keys_data:
+            try:
+                # Pass the JSON keymap data to add_keymap_attrs
+                remove_keymap_attrs(keymap_config, keymap_context, **keymap)
+            except Exception as e:
+                print(f"Error adding Global keymap: {e}")
+
 
 
 ###### MODAL KEYMAPS ######
@@ -299,8 +312,7 @@ def add_modal_keys():
     for keymap in keymap_modal_data:
         try:
             # Pass the JSON keymap data to add_modal_attrs
-            added_map = add_modal_attrs(**keymap)
-            keymap_registered_modal.append(added_map)
+            add_modal_attrs(**keymap)
         except Exception as e:
             print(f"Error adding Modal keymap: {keymap}, Error: {e}")
         
@@ -316,38 +328,47 @@ def remove_modal_keys():
     for keymap in keymap_modal_data:
         try:
             # Pass the JSON keymap data to remove_modal_attrs
-            added_map = remove_modal_attrs(**keymap)
-            keymap_unregistered_modal.append(added_map)
+            remove_modal_attrs(**keymap)
         except Exception as e:
             print(f"Error removing Modal keymap: {keymap}, Error: {e}")
 
 
-# remove created modal keymaps from list (used as a restore for default keymaps in unregister)
-def remove_modal_keys_from_list():
-    for keymap in keymap_registered_modal[:]:
-        remove_modal_attrs(*keymap)
-        keymap_registered_modal.remove(keymap)
+# remove created modal keymaps from JSON (used as a restore for default keymaps in unregister)
+def remove_modal_keys_from_json():
+    keymap_modal_data = convert_sets(json_content.get("add_modal_keymap", []))
+    if not keymap_modal_data:
+        print("Warning: No 'add_modal_keymap' found in the JSON content.")
+        return
+    
+    # Process modal keys
+    for keymap in keymap_modal_data:
+        try:
+            # Pass the JSON keymap data to remove_modal_attrs
+            remove_modal_attrs(**keymap)
+        except Exception as e:
+            print(f"Error removing Modal keymap: {e}")
 
-# add created modal keymaps to list (used as a restore for default keymaps in unregister)
-def add_modal_keys_from_list():
-    for keymap in keymap_unregistered_modal[:]:
-        if keymap is not None:
-            add_modal_attrs(*keymap)
-            keymap_unregistered_modal.remove(keymap)
-        else:
-            print("Warning: Encountered NoneType in keymap_unregistered_modal")
+
+# add created modal keymaps to JSON (used as a restore for default keymaps in unregister)
+def add_modal_keys_from_json():
+    keymap_modal_data = convert_sets(json_content.get("remove_modal_keymap", []))
+    if not keymap_modal_data:
+        print("Warning: No 'remove_modal_keymap' found in the JSON content.")
+        return
+    
+    # Process modal keys
+    for keymap in keymap_modal_data:
+        try:
+            # Pass the JSON keymap data to add_modal_attrs
+            add_modal_attrs(**keymap)
+        except Exception as e:
+            print(f"Error restoring Modal keymap: {e}")
+
 
 ###### REGISTER AND UNREGISTER FUNCTIONS ######
 
 # Keymap Register/Unregister Functions
 def keymap_register():
-    keymap_registered_addon.clear()
-    keymap_unregistered_addon.clear()
-
-    keymap_registered_global.clear()
-    
-    keymap_registered_modal.clear()
-    keymap_unregistered_modal.clear()
 
     add_addon_keys()
     remove_addon_keys()
@@ -361,21 +382,14 @@ def keymap_register():
 
 # Keymap Unregister Function (UPDATED)
 def keymap_unregister():
-    remove_addon_keys_from_list()
-    add_addon_keys_from_list()
+    remove_addon_keys_from_json()
+    add_addon_keys_from_json()
 
-    remove_global_keys_from_list()
+    remove_global_keys_from_json()
 
-    remove_modal_keys_from_list()
-    add_modal_keys_from_list()
+    remove_modal_keys_from_json()
+    add_modal_keys_from_json()
 
-    keymap_registered_addon.clear()
-    keymap_unregistered_addon.clear()
-
-    keymap_registered_global.clear()
-    
-    keymap_registered_modal.clear()
-    keymap_unregistered_modal.clear()
     print("Keymaps unregistered successfully.")
 
 

@@ -120,7 +120,7 @@ def add_modal_keys():
             print(f"Error adding Modal keymap: {keymap}, Error: {e}")
         
 
-# Remove Modal Keys from JSON
+# Remove Modal Keys from JSON (use in register)
 def remove_modal_keys():
     # Ensure "remove_modal_keymap" exists in the JSON content
     keymap_modal_data = json_content.get("remove_modal_keymap", [])
@@ -131,8 +131,7 @@ def remove_modal_keys():
     for keymap in keymap_modal_data:
         try:
             # Pass the JSON keymap data to remove_modal_attrs
-            added_map = remove_modal_attrs(**keymap)
-            keymap_unregistered_modal.append(added_map)
+            remove_modal_attrs(**keymap)
         except Exception as e:
             print(f"Error removing Modal keymap: {keymap}, Error: {e}")
 
