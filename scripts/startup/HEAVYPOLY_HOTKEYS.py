@@ -191,7 +191,7 @@ def remove_modal_attrs(keymap_config: str,
 # add Addon Keys from JSON (use in register)
 def add_addon_keys():
     keymap_attrs_data = convert_sets(json_content.get("add_keymap_attrs", []))
-    if not add_keymap_attrs:
+    if not keymap_attrs_data:
         print("Warning: No 'add_keymap_attrs' found in the JSON content.")
         return
 
