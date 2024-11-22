@@ -43,12 +43,22 @@
             "shift": true
         }
     ],
-    "modify_modal_keymap": [
+    "add_modal_keymap": [
         {
             "keymap_config": "Blender",
             "keymap_context": "Transform Modal Map",
-            "add_modal_keymap": { "modal": "AXIS_Y", "key": "SPACE" },
-            "remove_modal_keymap": { "modal": "CONFIRM", "key": "SPACE" }
+            "propvalue": "AXIS_Y",
+            "event_type" : "SPACE",
+            "value_key": "PRESS"
+        }
+    ],
+    "remove_modal_keymap": [
+        {
+            "keymap_config": "Blender",
+            "keymap_context": "Transform Modal Map",
+            "propvalue": "CONFIRM",
+            "event_type" : "SPACE",
+            "value_key": "PRESS"
         }
     ],
     "add_keymap_attrs": [
@@ -234,7 +244,16 @@
             "value_key": "PRESS",
             "ctrl": true,
             "name": "HP_MT_pie_boolean"
-        },
+        },    
+        {
+            "keymap_config": "Blender",
+            "keymap_context": "3D View",
+            "idname": "wm.call_menu_pie",
+            "event_type": "SPACE",
+            "value_key": "PRESS",
+            "ctrl": true,
+            "name": "HP_MT_pie_select"
+        },  
         {
             "keymap_config": "Blender",
             "keymap_context": "3D View",
