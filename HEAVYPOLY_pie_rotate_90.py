@@ -1,15 +1,3 @@
-bl_info = {
-	"name": "Pie Rotate_90",
-	"description": "Rotate 90",
-	"author": "Vaughan Ling",
-	"version": (0, 1, 0),
-	"blender": (2, 80, 0),
-	"location": "",
-	"warning": "",
-	"wiki_url": "",
-	"category": "Pie Menu"
-	}
-
 import bpy, bmesh
 from bpy.types import (
 		Menu,
@@ -79,10 +67,6 @@ class HP_OT_rotate_90_and_flatten(bpy.types.Operator):
 		if self.direction == 'RX':
 			bpy.ops.transform.rotate(value=1.5708, orient_axis='X', orient_type='GLOBAL', orient_matrix_type='GLOBAL', constraint_axis=(True, False, False))
 
-
-#bpy.ops.transform.rotate(value=1.5708, orient_axis='Z',  orient_matrix=((1, 0, 0), (0, 1, 0), (0, 0, 1)), orient_matrix_type='GLOBAL', constraint_axis=(False, False, True))
-
-
 #Flattens
 		if self.direction == 'FX':
 			bpy.ops.transform.resize(value=(0, 1, 1), constraint_axis=(True, False, False), orient_matrix_type='GLOBAL')
@@ -96,11 +80,9 @@ class HP_OT_rotate_90_and_flatten(bpy.types.Operator):
 			bpy.ops.object.vertex_group_remove(all=False, all_unlocked=False)
 			bpy.context.scene.tool_settings.transform_pivot_point = scenepivot
 		return {'FINISHED'}
+	
+
 classes = (
 	HP_MT_pie_rotate90,
 	HP_OT_rotate_90_and_flatten
 )
-register, unregister = bpy.utils.register_classes_factory(classes)	
-
-if __name__ == "__main__":
-	register()

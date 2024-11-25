@@ -20,18 +20,18 @@
     "remove_keymap": [
         {
             "keymap_config": "Blender",
-            "keymap_context": "Frames",
-            "idname": "screen.animation_play",
-            "event_type": "SPACE",
-            "value_key": "PRESS"
-        },
-        {
-            "keymap_config": "Blender",
             "keymap_context": "Window",
             "idname": "wm.save_mainfile",
             "event_type": "S",
             "value_key": "PRESS",
             "ctrl": true
+        },
+        {
+            "keymap_config": "Blender",
+            "keymap_context": "Frames",
+            "idname": "screen.animation_play",
+            "event_type": "SPACE",
+            "value_key": "PRESS"
         },
         {
             "keymap_config": "Blender", 
@@ -41,6 +41,21 @@
             "value_key": "PRESS",
             "ctrl": true,
             "shift": true
+        },
+        {
+            "keymap_config": "Blender", 
+            "keymap_context": "Object Non-modal",
+            "idname": "object.mode_set",
+            "event_type": "TAB",
+            "value_key": "PRESS"
+        },
+        {
+            "keymap_config": "Blender", 
+            "keymap_context": "3D View",
+            "idname": "wm.call_menu_pie",
+            "event_type": "Z",
+            "value_key": "PRESS",
+            "name": "VIEW3D_MT_shading_pie"
         }
     ],
     "add_modal_keymap": [
@@ -95,7 +110,7 @@
             "value_key": "PRESS",
             "ctrl": true,
             "shift": true,
-            "name": "HP_MT_pie_importexport"
+            "name": "HP_MT_pie_import_export"
         },
         {
             "keymap_config": "Blender",

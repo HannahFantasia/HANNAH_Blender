@@ -1,15 +1,3 @@
-bl_info = {
-    "name": "HP Boolean Pie",
-    "description": "",
-    "author": "Vaughan Ling",
-    "version": (0, 1, 0),
-    "blender": (2, 80, 0),
-    "location": "",
-    "warning": "",
-    "wiki_url": "",
-    "category": "Pie Menu"
-    }
-
 import bpy
 from bpy.types import Menu
 #bpy.context.view_layer.objects.active
@@ -405,7 +393,3 @@ classes = (
     HP_OT_boolean_slice,
     HP_OT_boolean_apply,
 )
-register, unregister = bpy.utils.register_classes_factory(classes)
-
-if __name__ == "__main__":
-    register()

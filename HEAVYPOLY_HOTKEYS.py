@@ -1,15 +1,3 @@
-bl_info = {
-    'name': 'Hannah_Hotkeys',
-    'description': 'Hotkeys',
-    'author': 'Hannah Ümit',
-    'version': (0, 1, 0),
-    'blender': (4, 0, 0),
-    'location': '',
-    'warning': '',
-    'wiki_url': '',
-    'category': 'Hotkeys'
-}
-
 import bpy
 import json
 import os
@@ -166,6 +154,7 @@ def add_modal_attrs(keymap_config: str,
                     event_type: str,
                     value_key: str,
                     **kwargs):
+
     # retrieve the keymap items context
     keymap_items_context = get_keymap_items_ctx(keymap_config, keymap_context)
     
@@ -230,7 +219,7 @@ def remove_addon_keys():
 
 # remove created addon keys from list (used as a restore for default keymaps in unregister)
 def remove_addon_keys_from_json():
-    keymap_attrs_data = convert_sets(json_content.get("add_keymap_attrs", []))
+    keymap_attrs_data = json_content.get("add_keymap_attrs", [])
     if not keymap_attrs_data:
         print("Warning: No 'add_keymap_attrs' found in the JSON content.")
         return
@@ -391,16 +380,3 @@ def keymap_unregister():
     add_modal_keys_from_json()
 
     print("Keymaps unregistered successfully.")
-
-
-
-
-# Register and Unregister Functions
-def register():
-    keymap_register()
-
-def unregister():
-    keymap_unregister()
-
-if __name__ == '__main__':
-    register()

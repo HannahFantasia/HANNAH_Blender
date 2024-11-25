@@ -1,16 +1,3 @@
-bl_info = {
-	"name": "Pie View",
-	"description": "View Modes",
-	"author": "Vaughan Ling",
-	"version": (0, 1, 0),
-	"blender": (2, 80, 0),
-	"location": "",
-	"warning": "",
-	"wiki_url": "",
-	"category": "Pie Menu"
-	}
-
-
 import bpy
 from bpy.types import Menu
 
@@ -186,15 +173,8 @@ class HP_OT_create_camera_at_view(bpy.types.Operator):
 		create_camera_at_view()
 		return {'FINISHED'}
 
-def register():
-	bpy.utils.register_class(HP_MT_pie_view)
-	bpy.utils.register_class(HP_OT_create_camera_at_view)
-	bpy.utils.register_class(HP_OT_render_presets)
-
-def unregister():
-	bpy.utils.unregister_class(HP_MT_pie_view)
-	bpy.utils.unregister_class(HP_OT_create_camera_at_view)
-	bpy.utils.unregister_class(HP_OT_render_presets)
-
-if __name__ == "__main__":
-	register()
+classes = (
+	HP_MT_pie_view,
+	HP_OT_create_camera_at_view,
+	HP_OT_render_presets
+)

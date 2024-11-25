@@ -1,15 +1,3 @@
-bl_info = {
-    "name": "Pie Selection",
-    "description": "Select Modes",
-    "author": "Vaughan Ling",
-    "version": (0, 1, 0),
-    "blender": (4, 3, 0),
-    "location": "",
-    "warning": "",
-    "wiki_url": "",
-    "category": "Pie Menu"
-    }
-
 import bpy
 from bpy.types import Menu
 
@@ -50,8 +38,8 @@ class HP_MT_pie_select(Menu):
         # top
 
         match bpy.context.object.type:
-            case "GPENCIL":
-                pie.operator('object.mode_set', text = 'GP Edit', icon='EDITMODE_HLT').mode='EDIT_GPENCIL'
+            case "GREASEPENCIL":
+                pie.operator('object.mode_set', text = 'GP Edit', icon='EDITMODE_HLT').mode='EDIT'
             case "META":
                 pie.operator('object.mode_set', text = 'Edit', icon='META_DATA').mode='EDIT'
             case "ARMATURE":
@@ -63,8 +51,8 @@ class HP_MT_pie_select(Menu):
 
         # topleft
         match bpy.context.object.type:
-            case "GPENCIL":
-                pie.operator('object.mode_set', text = 'GP Draw', icon='GREASEPENCIL').mode='PAINT_GPENCIL'
+            case "GREASEPENCIL":
+                pie.operator('object.mode_set', text = 'GP Draw', icon='GREASEPENCIL').mode='PAINT_GREASE_PENCIL'
             case "ARMATURE":
                 pie.operator('object.mode_set', text = 'Pose', icon='NONE').mode='POSE'
             case "META":
@@ -79,8 +67,8 @@ class HP_MT_pie_select(Menu):
 
         # topright
         match bpy.context.object.type:
-            case "GPENCIL":
-                pie.operator('object.mode_set', text = "GP Sculpt", icon="SCULPTMODE_HLT").mode="SCULPT_GPENCIL"
+            case "GREASEPENCIL":
+                pie.operator('object.mode_set', text = "GP Sculpt", icon="SCULPTMODE_HLT").mode="SCULPT_GREASE_PENCIL"
             case "META":
                 split = pie.split()
                 col = split.column()
@@ -126,9 +114,9 @@ class HP_MT_pie_select(Menu):
                 col.operator('object.mode_set', text = 'Weight Paint', icon='WPAINT_HLT').mode='WEIGHT_PAINT'
                 col.operator('object.mode_set', text = 'Texture Paint', icon='BRUSH_DATA').mode='TEXTURE_PAINT'
                 col.operator('object.sculpt_mode_with_dynotopo', text = 'Sculpt With Dynotopo', icon='SCULPTMODE_HLT')
-            case "GPENCIL":
-                col.operator('object.mode_set', text = 'Vertex Paint', icon='VPAINT_HLT').mode='VERTEX_GPENCIL'
-                col.operator('object.mode_set', text = 'Weight Paint', icon='WPAINT_HLT').mode='WEIGHT_GPENCIL'
+            case "GREASEPENCIL":
+                col.operator('object.mode_set', text = 'Vertex Paint', icon='VPAINT_HLT').mode='VERTEX_GREASE_PENCIL'
+                col.operator('object.mode_set', text = 'Weight Paint', icon='WPAINT_HLT').mode='WEIGHT_GREASE_PENCIL'
             case "LATTICE":
                 col.operator('object.mode_set', text = 'Weight Paint', icon='WPAINT_HLT').mode='WEIGHT_PAINT'
             case "ARMATURE":
@@ -188,13 +176,13 @@ class HP_OT_SelectModeSmart(bpy.types.Operator):
                     case "MESH":
                         bpy.ops.object.mode_set(mode='EDIT')
                         select(self.selectmode)
-                    case "GPENCIL":
-                        bpy.ops.object.mode_set(mode='GPENCIL_PAINT')
+                    case "GREASEPENCIL":
+                        bpy.ops.object.mode_set(mode='PAINT_GREASE_PENCIL')
                     case "CURVE" | "FONT":
                         bpy.ops.object.mode_set(mode='EDIT')
             case "EDIT_MESH":
                 select(self.selectmode)
-            case "GPENCIL_PAINT":
+            case "PAINT_GREASE_PENCIL":
                 bpy.context.mode = "OBJECT"
             case _:
                 bpy.ops.object.mode_set(mode="EDIT")
@@ -249,7 +237,3 @@ classes = (
     HP_OT_gp_canvas,
     HP_OT_select_border,
 )
-register, unregister = bpy.utils.register_classes_factory(classes)
-
-if __name__ == "__main__":
-    register()

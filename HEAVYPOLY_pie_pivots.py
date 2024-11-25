@@ -1,15 +1,3 @@
-bl_info = {
-    "name": "Pivots Pie",
-    "description": "",
-    "author": ", Vaughan Ling",
-    "version": (0, 1, 0),
-    "blender": (2, 80, 0),
-    "location": "3D View",
-    "warning": "",
-    "wiki_url": "",
-    "category": "Pivots Pie"
-    }
-
 import bpy
 from bpy.types import (
         Menu,
@@ -64,13 +52,4 @@ class HP_MT_pie_pivots(Menu):
         # 3 - BOTTOM - RIGHT
 
 
-classes = (
-    HP_MT_pie_pivots,
-
-
-)
-register, unregister = bpy.utils.register_classes_factory(classes)
-
-
-if __name__ == "__main__":
-    register()
+classes = (HP_MT_pie_pivots)

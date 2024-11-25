@@ -1,20 +1,5 @@
-bl_info = {
-	"name": "Pie Save",
-	"description": "Save import export Pie",
-	"author": "Vaughan Ling",
-	"version": (0, 1, 0),
-	"blender": (2, 80, 0),
-	"location": "",
-	"warning": "",
-	"category": "Pie Menu"
-	}
-
 import bpy
-from bpy.types import (
-		Menu,
-		Operator,
-		)
-import os
+from bpy.types import Menu
 
 class HP_MT_pie_save(Menu):
 	bl_label = "Save"
@@ -30,12 +15,8 @@ class HP_MT_pie_save(Menu):
 		pie.separator()
 		pie.menu("TOPBAR_MT_file_open_recent")
 
-def register():
+def save_register():
 	bpy.utils.register_class(HP_MT_pie_save)
 
-
-def unregister():
+def save_unregister():
 	bpy.utils.unregister_class(HP_MT_pie_save)
-
-if __name__ == "__main__":
-	register()

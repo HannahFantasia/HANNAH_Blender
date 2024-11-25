@@ -1,15 +1,3 @@
-bl_info = {
-	"name": "Pie Areas",
-	"description": "Area Types",
-	"author": "Vaughan Ling",
-	"version": (0, 1, 0),
-	"blender": (2, 80, 0),
-	"location": "",
-	"warning": "",
-	"wiki_url": "",
-	"category": "Pie Menu"
-	}
-
 import bpy
 from bpy.types import (
 		Menu,
@@ -133,7 +121,3 @@ classes = (
 	HP_OT_texture_paint_toggle,
 	HP_OT_fullscreen
 )
-register, unregister = bpy.utils.register_classes_factory(classes)
-
-if __name__ == "__main__":
-	register()
