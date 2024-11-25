@@ -1,8 +1,5 @@
 import bpy
-from bpy.types import (
-        Menu,
-        Operator,
-        )
+from bpy.types import Menu
 
 class HP_MT_pie_pivots(Menu):
     bl_label = "Pivots Pie"
@@ -52,4 +49,10 @@ class HP_MT_pie_pivots(Menu):
         # 3 - BOTTOM - RIGHT
 
 
-classes = (HP_MT_pie_pivots)
+def pivot_register():
+        bpy.utils.register_class(HP_MT_pie_pivots)
+        bpy.types.TOPBAR_MT_file_import.append(HP_MT_pie_pivots)
+
+def pivot_unregister():
+    bpy.utils.unregister_class(HP_MT_pie_pivots)
+    bpy.types.TOPBAR_MT_file_import.remove(HP_MT_pie_pivots)

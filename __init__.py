@@ -17,54 +17,39 @@ from . import (
     HEAVYPOLY_HOTKEYS,
     HEAVYPOLY_OPERATORS,
     HEAVYPOLY_pie_selection,
-    #HEAVYPOLY_pie_areas,
-    #HEAVYPOLY_pie_boolean,
     HEAVYPOLY_pie_import_export,
-    #HEAVYPOLY_pie_rotate_90,
     HEAVYPOLY_pie_save,
-    #HEAVYPOLY_pie_pivots,
+    HEAVYPOLY_pie_pivots,
     HEAVYPOLY_pie_shading,
-    #HEAVYPOLY_pie_view
+    HEAVYPOLY_pie_boolean,
+    HEAVYPOLY_pie_rotate_90,
+    HEAVYPOLY_pie_view
 )
-
-# Collect classes from modules
-modules = [
-    HEAVYPOLY_OPERATORS.classes,
-    HEAVYPOLY_pie_selection.classes,
-    #HEAVYPOLY_pie_areas.classes,
-    #HEAVYPOLY_pie_boolean.classes,
-    #HEAVYPOLY_pie_rotate_90.classes,
-    #HEAVYPOLY_pie_pivots.classes,
-    #HEAVYPOLY_pie_view.classes
-]
 
 # Register and Unregister Functions
 def register():
     HEAVYPOLY_pie_save.save_register()
-    HEAVYPOLY_pie_import_export.save_register()
-    HEAVYPOLY_pie_shading.save_register()
-    bpy.types.VIEW3D_MT_object.append(HEAVYPOLY_OPERATORS.menu_func)
-
-    for cls in modules:
-        for c in cls:
-            try:
-                bpy.utils.register_class(c)
-            except Exception as e:
-                print(f"Failed to register {c}: {e}")
+    HEAVYPOLY_pie_import_export.import_export_register()
+    HEAVYPOLY_pie_shading.shading_register()
+    HEAVYPOLY_pie_pivots.pivot_register()
+    HEAVYPOLY_pie_boolean.boolean_register()
+    HEAVYPOLY_pie_view.view_register()
+    HEAVYPOLY_OPERATORS.operator_register()
+    HEAVYPOLY_pie_selection.select_register()
     HEAVYPOLY_HOTKEYS.keymap_register()
+    HEAVYPOLY_pie_rotate_90.rotate_90_register()
 
 def unregister():
     HEAVYPOLY_pie_save.save_unregister()
-    HEAVYPOLY_pie_import_export.save_unregister()
-    HEAVYPOLY_pie_shading.save_unregister()
-    bpy.types.VIEW3D_MT_object.append(HEAVYPOLY_OPERATORS.menu_func)
-    for cls in modules:
-        for c in cls:
-            try:
-                bpy.utils.unregister_class(c)
-            except Exception as e:
-                print(f"Failed to unregister {c}: {e}")
+    HEAVYPOLY_pie_import_export.import_export_unregister()
+    HEAVYPOLY_pie_shading.shading_unregister()
+    HEAVYPOLY_pie_boolean.boolean_unregister()
+    HEAVYPOLY_pie_pivots.pivot_unregister()
+    HEAVYPOLY_pie_view.view_unregister()
+    HEAVYPOLY_OPERATORS.operator_unregister()
+    HEAVYPOLY_pie_selection.select_unregister()
     HEAVYPOLY_HOTKEYS.keymap_unregister()
+    HEAVYPOLY_pie_rotate_90.rotate_90_unregister()
 
 if __name__ == '__main__':
     register()

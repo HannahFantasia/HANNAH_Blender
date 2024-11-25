@@ -153,12 +153,12 @@ classes = (
     ToggleBackfaceCullingOperator
 )
 
-def save_register():
+def shading_register():
     for cls in classes:
         bpy.utils.register_class(cls)
     bpy.types.TOPBAR_MT_file_import.append(HP_MT_pie_shading)
 
-def save_unregister():
+def shading_unregister():
     for cls in classes:
         bpy.utils.unregister_class(cls)
     bpy.types.TOPBAR_MT_file_import.remove(HP_MT_pie_shading)

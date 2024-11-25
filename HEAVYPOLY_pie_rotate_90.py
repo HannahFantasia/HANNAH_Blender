@@ -82,7 +82,12 @@ class HP_OT_rotate_90_and_flatten(bpy.types.Operator):
 		return {'FINISHED'}
 	
 
-classes = (
-	HP_MT_pie_rotate90,
-	HP_OT_rotate_90_and_flatten
-)
+def rotate_90_register():
+	bpy.utils.register_class(HP_MT_pie_rotate90)
+	bpy.utils.register_class(HP_OT_rotate_90_and_flatten)
+	bpy.types.TOPBAR_MT_file_import.append(HP_MT_pie_rotate90)
+
+def rotate_90_unregister():
+	bpy.utils.unregister_class(HP_MT_pie_rotate90)
+	bpy.utils.unregister_class(HP_OT_rotate_90_and_flatten)
+	bpy.types.TOPBAR_MT_file_import.remove(HP_MT_pie_rotate90)

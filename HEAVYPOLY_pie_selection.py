@@ -237,3 +237,11 @@ classes = (
     HP_OT_gp_canvas,
     HP_OT_select_border,
 )
+
+def select_register():
+    for cls in classes:
+        bpy.utils.register_class(cls)
+
+def select_unregister():
+    for cls in classes:
+        bpy.utils.unregister_class(cls)

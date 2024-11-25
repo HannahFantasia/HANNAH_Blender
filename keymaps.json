@@ -34,6 +34,16 @@
             "value_key": "PRESS"
         },
         {
+            "keymap_config": "Blender",
+            "keymap_context": "Frames",
+            "idname": "screen.animation_play",
+            "event_type": "SPACE",
+            "value_key": "PRESS",
+            "ctrl": true,
+            "shift": true,
+            "reverse":true
+        },
+        {
             "keymap_config": "Blender", 
             "keymap_context": "Window",
             "idname": "wm.save_as_mainfile",
@@ -48,6 +58,14 @@
             "idname": "object.mode_set",
             "event_type": "TAB",
             "value_key": "PRESS"
+        },
+        {
+            "keymap_config": "Blender", 
+            "keymap_context": "3D View",
+            "idname": "view3d.render_border",
+            "event_type": "B",
+            "value_key": "PRESS",
+            "ctrl": true
         },
         {
             "keymap_config": "Blender", 
@@ -268,7 +286,7 @@
             "value_key": "PRESS",
             "ctrl": true,
             "name": "HP_MT_pie_select"
-        },  
+        },
         {
             "keymap_config": "Blender",
             "keymap_context": "3D View",

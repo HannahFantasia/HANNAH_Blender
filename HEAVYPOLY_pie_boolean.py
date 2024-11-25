@@ -10,6 +10,7 @@ class HP_MT_pie_boolean(Menu):
         pie = layout.menu_pie()
         split = pie.split()
         col = split.column(align=True)
+
         #Plain ol Booleans
         row = col.row(align=True)
         row.scale_y=1.5
@@ -102,13 +103,8 @@ class HP_MT_pie_boolean(Menu):
         prop.cutline = 'YES'
         prop.laser = 'NO'
         prop.insetted = 'NO'
-        prop = row.operator("view3d.hp_boolean_live", text="Live Laser")
-        prop.bool_operation = 'DIFFERENCE'
-        prop.live = 'YES'
-        prop.laser = 'YES'
-        prop.insetted = 'NO'
-        split = pie.split()
-        col = split.column(align=True)
+        row = col.row(align=True)
+        row.scale_y=1.5
 
         row = col.row(align=True)
         row.scale_y=1.5
@@ -119,7 +115,6 @@ class HP_MT_pie_boolean(Menu):
         row = col.row(align=True)
         row.scale_y=1.5
         row.operator("view3d.hp_boolean_apply", text="Apply All Modifiers").all = 'YES'
-        #row.operator("view3d.hp_boolean_toggle_bool_solver", text="Toggle Solver")
         pie.operator("view3d.hp_boolean_toggle_cutters", text="Toggle Cutters")
 
 
@@ -393,3 +388,13 @@ classes = (
     HP_OT_boolean_slice,
     HP_OT_boolean_apply,
 )
+
+def boolean_register():
+    for cls in classes:
+        bpy.utils.register_class(cls)
+    bpy.types.VIEW3D_MT_object.append(HP_MT_pie_boolean)
+
+def boolean_unregister():
+    for cls in classes:
+        bpy.utils.unregister_class(cls)
+    bpy.types.VIEW3D_MT_object.remove(HP_MT_pie_boolean)

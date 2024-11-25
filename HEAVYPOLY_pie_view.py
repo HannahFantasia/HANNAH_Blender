@@ -178,3 +178,13 @@ classes = (
 	HP_OT_create_camera_at_view,
 	HP_OT_render_presets
 )
+
+def view_register():
+	for cls in classes:
+		bpy.utils.register_class(cls)
+	bpy.types.VIEW3D_MT_view.append(HP_MT_pie_view)
+
+def view_unregister():
+	for cls in classes:
+		bpy.utils.unregister_class(cls)
+	bpy.types.VIEW3D_MT_view.remove(HP_MT_pie_view)

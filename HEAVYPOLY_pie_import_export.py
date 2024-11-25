@@ -54,12 +54,12 @@ class HP_MT_pie_import_export(Menu):
         box.operator('export_scene.obj', text='Export OBJ')
         box.operator('image.save_as', text='Export Image')
 
-def save_register():
+def import_export_register():
     bpy.utils.register_class(HP_MT_pie_import_export)
     bpy.types.TOPBAR_MT_file_import.append(HP_MT_pie_import_export)
     bpy.utils.register_class(ImportSVGAsGreasePencil)
 
-def save_unregister():
+def import_export_unregister():
     bpy.utils.unregister_class(HP_MT_pie_import_export)
     bpy.types.TOPBAR_MT_file_import.remove(HP_MT_pie_import_export)
     bpy.utils.unregister_class(ImportSVGAsGreasePencil)

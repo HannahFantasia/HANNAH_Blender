@@ -159,3 +159,12 @@ classes = (
     HP_OT_SeparateAndSelect,
     HP_OT_SmartScale,
 )
+def operator_register():
+    for cls in classes:
+        bpy.utils.register_class(cls)
+    bpy.types.VIEW3D_MT_object.append(menu_func)
+
+def operator_unregister():
+    for cls in classes:
+        bpy.utils.unregister_class(cls)
+    bpy.types.VIEW3D_MT_object.remove(menu_func)
