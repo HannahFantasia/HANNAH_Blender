@@ -23,7 +23,7 @@ from . import (
     HEAVYPOLY_pie_shading,
     HEAVYPOLY_pie_boolean,
     HEAVYPOLY_pie_rotate_90,
-    HEAVYPOLY_pie_view
+    HEAVYPOLY_pie_view,
 )
 
 # Register and Unregister Functions
