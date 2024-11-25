@@ -330,7 +330,7 @@
         {
             "keymap_config": "Blender",
             "keymap_context": "Grease Pencil",
-            "idname": "gpencil.select_linked",
+            "idname": "grease_pencil.select_linked",
             "event_type": "LEFTMOUSE",
             "value_key": "DOUBLE_CLICK",
             "shift": true

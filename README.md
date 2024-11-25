@@ -1,10 +1,10 @@
 # HANNAH_Blender
 
-An adapted workflow for Blender 4.1 for tablet users and left handed people. (Also friendly for right handed people)\
+An adapted workflow for Blender 4.3 for tablet users and left handed people. (Also friendly for right handed people)\
 **IT IS RECOMMENDED THAT YOU KNOW THE DEFAULT KEYMAP OF BLENDER AND ARE USED TO A PIE MENU WORKFLOW, THIS OVERHAUL IS NOT FOR BEGINNERS**
 
 I have been using the [HEAVYPOLY_BLENDER](https://github.com/HEAVYPOLY/HEAVYPOLY_Blender) setup since 2020, mainly for accessiblity reasons as RSI developed in my right hand.\
-In 2022 I have started out doing a few PRs to optimize it for later blender versions. Down the line I started deleting scripts inside it that I didn't use and will add many more in the future.
+In 2022 I have started out doing a few PRs to optimize it for later blender versions. Down the line I started deleting scripts inside it that I didn't use and may add many more in the future.
 
 This overhaul may exist with your installed addons. This addon covers built in addons and does not rely on external ones to do certain operations.\
 Change preferences accordingly, Built in addons should be covered. Externally installed ones are not.
@@ -14,10 +14,33 @@ The goal is to keep this overhaul as easy of an experience from this to Vanilla 
 
 
 Install Instructions:
-1. Install a **fresh** version of Blender, preferably as a portable version if your OS allows it.
-2. Start up Blender once.
-3. Go to the [Releases](https://github.com/HannahFantasia/HANNAH_Blender/releases) and download the latest version `.zip`
-4. Open your Blender installation folder.
-5. Click on the version folder, could be something like `4.1`
-6. Drop the contents of the `release.zip` inside the version folder.
-7. Open Blender inside the installation folder and You're done ;)
+1. Install as a legacy addon
+
+++GLOBAL KEYS++
+- `CTRL + TAB` : show userprefs
+- `F11` + toggle fullscreen
+- `.` : play animation
+
+++ADD KEYMAP ATTRS++
+- `SPACE` : translate --> `SPACE` : Y Axis
+- `SPACE` : transform Dopesheet
+- `TAB` : subdivision toggle (3D View)
+- `CTRL + S` : pie save
+- `CTRL + SHIFT + S` : pie import export
+- `CTRL + SHIFT + B` : render border
+- `CTRL + SPACE` : pie select
+- `CTRL + ALT + SPACE` : pie rotate90
+- `CTRL + SHIFT + SPACE` : pie pivots
+- `CTRL + B` : pie boolean
+- `V` : pie view (3D View)
+- `Z` : pie shading (3D View)
+- `CTRL + SHIFT + MIDDLEMOUSE` : focus view
+- `CTRL + SHIFT + TAB` : toggle console
+- `SHIFT + U` : reload script
+- `MIDDLEMOUSE` : change frame (Animation)
+- `DOUBLE CLICK LEFTMOUSE` : select linked
+- `SHIFT + DOUBLE CLICK LEFTMOUSE` : add select linked 
+- `E` : dupli extrude cursor (Mesh)
+- `CTRL + E` : menu extrude
+- `ALT + LEFTMOUSE` : sample color
+- `D` : redo last
